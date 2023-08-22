@@ -9,6 +9,20 @@ ENV DEBIAN_FRONTEND noninteractive
 RUN apt-get update && apt-get install -y --no-install-recommends \
         python3 python3-venv wget build-essential
 
+RUN wget \
+    https://repo.anaconda.com/miniconda/Miniconda3-latest-Linux-x86_64.sh \
+    && mkdir /root/.conda \
+    && bash Miniconda3-latest-Linux-x86_64.sh -b \
+    && rm -f Miniconda3-latest-Linux-x86_64.sh
+
+RUN conda --version
+
+RUN conda init
+
+RUN conda create -n extras
+
+RUN /bin/bash -c "source activate extras"
+
 WORKDIR /sillytavern-extras/
 COPY . .
 
