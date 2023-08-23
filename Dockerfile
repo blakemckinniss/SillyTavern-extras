@@ -27,7 +27,8 @@ WORKDIR /sillytavern-extras/
 COPY . .
 
 ARG REQUIREMENTS
-RUN pip install -r $REQUIREMENTS
+RUN pip install -r requirements-complete.txt
+RUN pip install -r requirements-rvc.txt
 
 ARG MODULES
-CMD ["python","server.py","--enable-modules=$MODULES", "--share", "--secure"]
+CMD ["python","server.py","--enable-modules=caption,summarize,classify,keywords,prompt,rvc,chromadb", "--share", "--secure"]
